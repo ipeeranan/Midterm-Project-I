@@ -5,7 +5,7 @@ var db = pgp('postgres://nkwnjxuiidwrns:b72b4de42f726173c9acee8a85dd10ed1c8dc1a2
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use(express.static('static'));
 app.set('view engine', 'ejs');
@@ -29,36 +29,36 @@ app.get('/products', function (req, res) {
     var id = req.param('id');
     var sql = 'select * from products';
     if (id) {
-        sql += ' where id ='+id;
-        }
+        sql += ' where id =' + id;
+    }
     db.any(sql)
-    .then(function(data){
-        console.log('DATA:'+data);
-        res.render('pages/products',{product:data})
-        
-    })
-    .catch(function(error){
-        console.log('ERROR:'+error);
-        
-    })
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/products', { product: data })
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
 
 });
 // display all products
 app.get('/products/:pid', function (req, res) {
     var pid = req.params.pid;
     var sql = "select * from products where id=" + pid;
-    
+
     db.any(sql)
-    .then(function(data){
-        console.log('DATA:'+data);
-        res.render('pages/product_edit',{product:data[0]})
-        
-    })
-    .catch(function(error){
-        console.log('ERROR:'+error);
-        
-    })
-    
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/product_edit', { product: data[0] })
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
+
 
 });
 app.get('/users/:id', function (req, res) {
@@ -91,17 +91,18 @@ app.get('/users', function (req, res) {
 
 });
 //Update data
-app.post('/product/update',function (req,res){
+app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
     var sql = `update product set title = ${title}, price = ${price} where id = ${id}`;
     res.send(sql);
-//db.none
-console.log('UPDATE:' + sql);
-res.direct('/products');
+    //db.none
+    console.log('UPDATE:' + sql);
+    res.direct('/products');
 });
 
-console.log('App is running at http://localhost:8080');
-app.listen(8080);
-
+var port = process.env.PORT || 8080;
+app.listen(port, function () {
+    console.log('App is running on http://localhost:' + port);
+});
