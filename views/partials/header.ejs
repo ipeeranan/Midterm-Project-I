@@ -50,19 +50,20 @@
          <form class="form-inline my-2 my-lg-0">
              <input class="form-control mr-sm-2" id="myInput" type="text" placeholder="Search">
              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             <script>
+                $(document).ready(function(){
+                  $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function() {
+                      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                  });
+                });
+                </script>
          </form>
      </div>
  </nav>
- <script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-    });
-    </script>
+ 
   <div class="container">
 
 
