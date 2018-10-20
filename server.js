@@ -118,7 +118,7 @@ app.get('/users/:id', function (req, res) {
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('/product/update', { user: data[0]});
+            res.render('pages/user_edit', { user: data[0]});
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
