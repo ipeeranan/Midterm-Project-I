@@ -110,7 +110,6 @@ app.post('/product/update', function (req, res) {
 });
 //user
 app.get('/users/:id', function (req, res) {
-
     var id = req.params.id;
     var sql = 'select * from users';
     if (id) {
@@ -119,8 +118,7 @@ app.get('/users/:id', function (req, res) {
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('pages/users', { users: data })
-
+            res.render('/product/update', { user: data })
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
@@ -129,7 +127,7 @@ app.get('/users/:id', function (req, res) {
 
 
 //update user_edit
-app.post('/user/update', function (req, res) {
+app.post('/users/update', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
