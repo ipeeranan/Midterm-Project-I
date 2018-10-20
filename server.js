@@ -6,6 +6,7 @@ var db = pgp('postgres://swvdjapflwlqyg:c0c2a74d8ea2d5012d6e41aadcf5242b7d3a52f6
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use(express.static('static'));
