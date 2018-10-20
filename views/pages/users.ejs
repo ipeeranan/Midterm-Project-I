@@ -9,7 +9,7 @@
             <th><a  class="btn btn-danger" href="/newuser" role="button">ADD NEW</a></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
     <%users.forEach(function(user){ %>
 <tr>
             <td scope="row"><%= user.id %></td>
