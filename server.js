@@ -177,7 +177,7 @@ app.get('/user_delete/:id', function (req, res) {
 
 
 //newproduct
-app.get('/newproducts', function (req, res) {
+app.get('/newproduct', function (req, res) {
     res.render('pages/newproduct');
 })
 app.post('/addnewproduct', function (req, res) {
@@ -201,7 +201,7 @@ app.post('/addnewproduct', function (req, res) {
 })
 
 //newuser
-app.get('/newusers', function (req, res) {
+app.get('/newuser', function (req, res) {
     res.render('pages/newuser');
 })
 app.post('/addnewuser', function (req, res) {
