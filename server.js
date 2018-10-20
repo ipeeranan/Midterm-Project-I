@@ -1,6 +1,6 @@
 var express = require('express');
 var pgp = require('pg-promise')();
-var db = pgp(process.env.DATABASE_URL)
+//var db = pgp(process.env.DATABASE_URL)
 var db = pgp('postgres://swvdjapflwlqyg:c0c2a74d8ea2d5012d6e41aadcf5242b7d3a52f6921650ac736b7a10885f5a91@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d1bhuue0uajvkm?ssl=true');
 
 var app = express();
@@ -29,9 +29,9 @@ app.get('/products', function (req, res) {
     //res.download('./static/index.html');
     //res.redirect('/about'); var pgp =require('pg-promise');
     var id = req.param('id');
-    var sql = 'select * from products order by id ASC';
+    var sql = 'select * from products';
     if (id) {
-        sql += ' where id =' + id + 'order by id ASC';
+        sql += ' where id =' + id;
     }
     db.any(sql)
         .then(function (data) {
@@ -48,7 +48,7 @@ app.get('/products', function (req, res) {
 // display all products
 app.get('/products/:pid', function (req, res) {
     var pid = req.params.pid;
-    var sql = "select * from products where id =" + pid + 'order by id asc';
+    var sql = "select * from products where id=" + pid;
 
     db.any(sql)
         .then(function (data) {
@@ -82,11 +82,7 @@ app.get('/users/:id', function (req, res) {
 });
 
 app.get('/users', function (req, res) {
-    var sql = 'select * from users  order by id ASC';
-    if (id) {
-        sql += ' where id =' + id + 'order by id ASC';
-    }
-    db.any(sql)
+    db.any('select * from users')
         .then(function (data) {
             console.log('DATA:' + data);
             res.render('pages/users', { users: data })
