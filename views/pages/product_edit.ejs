@@ -1,4 +1,14 @@
 <% include ../partials/header %>
+<script language="JavaScript">
+  function CheckConfirm() {
+    if (confirm('Would you want to delete item?') == true) {
+      window.location = "/product_delete/<%= product.id %>";
+    } else {
+      return (null);
+    }
+  }
+</script>
+
 <form action="/product/update" method="post">
   <div class="form-group">
     <label for="">ID</label>
