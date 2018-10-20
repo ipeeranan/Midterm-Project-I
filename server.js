@@ -1,6 +1,6 @@
 var express = require('express');
 var pgp = require('pg-promise')();
-//var db = pgp(process.env.DATABASE_URL)
+var db = pgp(process.env.DATABASE_URL);
 var db = pgp('postgres://swvdjapflwlqyg:c0c2a74d8ea2d5012d6e41aadcf5242b7d3a52f6921650ac736b7a10885f5a91@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d1bhuue0uajvkm?ssl=true');
 
 var app = express();
