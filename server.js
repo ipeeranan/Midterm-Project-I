@@ -102,6 +102,29 @@ app.post('/product/update', function (req, res) {
     console.log('UPDATE:' + sql);
     res.direct('/products');
 });
+//newuser
+app.get('/newusers', function (req, res) {
+    res.render('pages/newuser');
+})
+
+app.post('/addnewuser', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+    var sql = `INSERT INTO users (id, email, password)
+    VALUES ('${id}', '${email}', '${password}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
