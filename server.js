@@ -131,8 +131,8 @@ app.get('/users/:id', function (req, res) {
 //update user_edit
 app.post('/user/update', function (req, res) {
     var id = req.body.id;
-    var title = req.body.title;
-    var price = req.body.price;
+    var email = req.body.email;
+    var password = req.body.password;
     var sql = `update users set email = '${email}',password = '${password}' where id = '${id}' `;
     //db.none
     db.any(sql)
