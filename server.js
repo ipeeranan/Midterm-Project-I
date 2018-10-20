@@ -111,10 +111,7 @@ app.post('/product/update', function (req, res) {
 //user
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
-    var sql = 'select * from users';
-    if (id) {
-        sql += ' where id =' + id;
-    }
+    var sql = "select * from users where id =" + id;
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
