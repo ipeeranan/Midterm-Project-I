@@ -1,9 +1,10 @@
 var express = require('express');
 var pgp = require('pg-promise')();
-//var db = pgp(process.env.DATABASE_URL)
+var db = pgp(process.env.DATABASE_URL);
 var db = pgp('postgres://swvdjapflwlqyg:c0c2a74d8ea2d5012d6e41aadcf5242b7d3a52f6921650ac736b7a10885f5a91@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d1bhuue0uajvkm?ssl=true');
 
 var app = express();
+var moment = require('moment');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,9 +25,8 @@ app.get('/about', function (req, res) {
     var bdate = '28/01/1998'
     res.render('pages/about', { fullname: name, hobbies: hobbies, bdate });
 });
+//หน้าสินค้า
 app.get('/products', function (req, res) {
-    //res.download('./static/index.html');
-    //res.redirect('/about'); var pgp =require('pg-promise');
     var id = req.param('id');
     var sql = 'select * from products';
     if (id) {
@@ -47,12 +47,13 @@ app.get('/products', function (req, res) {
 // display all products
 app.get('/products/:pid', function (req, res) {
     var pid = req.params.pid;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = "select * from products where id=" + pid;
 
     db.any(sql)
         .then(function (data) {
-            console.log('DATA:' + data);
-            res.render('pages/product_edit', { product: data[0] })
+            //console.log('DATA:' + data);
+            res.render('pages/product_edit', { product: data[0],time: times })
 
         })
         .catch(function (error) {
@@ -64,12 +65,13 @@ app.get('/products/:pid', function (req, res) {
 });
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = "select * from users where id=" + id;
 
     db.any(sql)
         .then(function (data) {
-            console.log('DATA:' + data);
-            res.render('pages/user_edit', { user: data[0] })
+            //console.log('DATA:' + data);
+            res.render('pages/user_edit', { user: data[0],time: times })
 
         })
         .catch(function (error) {
@@ -79,14 +81,18 @@ app.get('/users/:id', function (req, res) {
 
 
 });
-
+//User
 app.get('/users', function (req, res) {
-    db.any('select * from users')
+    var id = req.param('id');
+    var sql = 'select * from users';
+    if (id){
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
             res.render('pages/users', { users: data })
         })
-
         .catch(function (error) {
             console.log('ERROR:' + error);
         })
@@ -109,6 +115,7 @@ app.post('/product/update', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
+
 //user
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
