@@ -204,7 +204,7 @@ app.post('/newproduct', function (req, res) {
 app.get('/newuser', function (req, res) {
     res.render('pages/newuser');
 })
-app.post('/addnewuser', function (req, res) {
+app.post('/newuser', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
