@@ -180,7 +180,7 @@ app.get('/user_delete/:id', function (req, res) {
 app.get('/newproduct', function (req, res) {
     res.render('pages/newproduct');
 })
-app.post('/addnewproduct', function (req, res) {
+app.post('/newproduct', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
