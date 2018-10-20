@@ -91,17 +91,23 @@ app.get('/users', function (req, res) {
         })
 
 });
-//Update data
+//Update product
 app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
     var sql = `update product set title = ${title}, price = ${price} where id = ${id}`;
     res.send(sql);
-    //db.none
+    db.none
     console.log('UPDATE:' + sql);
     res.redirect('/products');
 });
+//update user
+
+
+
+
+
 //user
 app.get('/users/:id', function (req, res) {
 
