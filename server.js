@@ -108,12 +108,6 @@ app.post('/product/update', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-//update user
-
-
-
-
-
 //user
 app.get('/users/:id', function (req, res) {
 
