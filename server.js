@@ -102,11 +102,35 @@ app.post('/product/update', function (req, res) {
     console.log('UPDATE:' + sql);
     res.direct('/products');
 });
+
+//newproduct
+app.get('/newproducts', function (req, res) {
+    res.render('pages/newproduct');
+})
+app.post('/addnewproduct', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `INSERT INTO products (id, title, price)
+    VALUES ('${id}', '${title}', '${price}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+})
+
 //newuser
 app.get('/newusers', function (req, res) {
     res.render('pages/newuser');
 })
-
 app.post('/addnewuser', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
