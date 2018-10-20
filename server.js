@@ -100,7 +100,7 @@ app.post('/product/update', function (req, res) {
     res.send(sql);
     //db.none
     console.log('UPDATE:' + sql);
-    res.direct('/products');
+    res.redirect('/products');
 });
 //user
 app.get('/users/:id', function (req, res) {
