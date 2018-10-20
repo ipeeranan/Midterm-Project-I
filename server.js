@@ -135,7 +135,7 @@ app.get('/users/:id', function (req, res) {
 
 
 //update user_edit
-app.post('/users/update', function (req, res) {
+app.post('/user/update', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
