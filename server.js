@@ -98,9 +98,16 @@ app.post('/product/update', function (req, res) {
     var price = req.body.price;
     var sql = `update product set title = ${title}, price = ${price} where id = ${id}`;
     res.send(sql);
-    db.none
-    console.log('UPDATE:' + sql);
-    res.redirect('/products');
+    //db.none
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
 });
 //update user
 
