@@ -102,6 +102,79 @@ app.post('/product/update', function (req, res) {
     console.log('UPDATE:' + sql);
     res.direct('/products');
 });
+//user
+app.get('/users/:id', function (req, res) {
+
+    var id = req.params.id;
+    var sql = 'select * from users';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/users', { users: data })
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
+
+//update user_edit
+app.post('/user/update', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+
+    var sql = `update users set email = '${email}', password = '${password}' where id = '${id}' `;
+    db.none(sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users');
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
+//delete product button
+app.get('/product_delete/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'DELETE FROM products';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products');
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+//delete user button
+app.get('/user_delete/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'DELETE FROM users';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users');
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
 
 //newproduct
 app.get('/newproducts', function (req, res) {
