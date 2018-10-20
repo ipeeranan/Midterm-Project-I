@@ -6,6 +6,7 @@
             <th>ID</th>
             <th>Email</th>
             <th>password</th>
+            <th><a  class="btn btn-danger" href="/newuser" role="button">ADD NEW</a></th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
             <td scope="row"><%= user.id %></td>
             <td><%= user.email %></td>
             <td><%= user.password %></td>
+            <td><a  class="btn btn-primary" href="/users/<%= user.id %>" role="button">EDIT</a></td>
         </tr>
     <% }); %>
         
