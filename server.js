@@ -230,6 +230,37 @@ app.post('/newuser', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
+//report Products
+app.get('/report_product', function (req, res) {
+    var id = req.param('id');
+    var sql = 'select* from products ORDER BY Price DESC limit 10';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/report_product', { products: data })
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+});
+//report user
+app.get('/report_user', function (req, res) {
+    db.any('select * from users ORDER BY  email ASC', )
+        .then(function (data) {
+            console.log('DATA' + data);
+            res.render('pages/report_user', { users: data })
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
