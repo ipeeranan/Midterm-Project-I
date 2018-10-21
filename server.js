@@ -2,7 +2,7 @@ var express = require('express');
 var pgp = require('pg-promise')();
 var db = pgp(process.env.DATABASE_URL);
 var db = pgp('postgres://swvdjapflwlqyg:c0c2a74d8ea2d5012d6e41aadcf5242b7d3a52f6921650ac736b7a10885f5a91@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d1bhuue0uajvkm?ssl=true');
-
+var moment = require('moment');
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -65,13 +65,13 @@ app.get('/products/:pid', function (req, res) {
 });
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = "select * from users where id=" + id;
-
+    
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('pages/user_edit', { user: data[0] })
-
+            res.render('pages/user_edit', { user: data[0], time: times  });
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
