@@ -30,8 +30,13 @@
   <div class="form-group">
     <label for="">TIME</label>
     <input type="text"
-      class="form-control" value="<%= time %>"name="create" id="" aria-describedby="helpId" placeholder="" disabled>
+      class="form-control" value="<%= time %>"name="create" id="datepicker" aria-describedby="helpId" placeholder="" disabled>
     <small id="helpId" class="form-text text-muted">TIME</small>
+    <script>
+      $('#datepicker').datepicker({
+        showOtherMonths: true
+      });
+  </script>
   </div>
   <div>
     <a name="" id="" class="btn btn-secondary" href="/products" role="button">CANCLE</a>
