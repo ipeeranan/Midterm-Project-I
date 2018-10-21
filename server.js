@@ -208,8 +208,8 @@ app.post('/newproduct', function (req, res) {
 
 //newuser
 app.get('/newuser', function (req, res) {
-    var times = moment().format();
-    res.render('pages/newuser',{time: times  });
+    var time = moment().format();
+    res.render('pages/newuser',{time: time  });
 })
 app.post('/newuser', function (req, res) {
     var id = req.body.id;
