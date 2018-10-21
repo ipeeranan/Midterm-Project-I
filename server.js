@@ -182,12 +182,13 @@ app.get('/user_delete/:id', function (req, res) {
 
 //newproduct
 app.get('/newproduct', function (req, res) {
-    res.render('pages/newproduct');
+    res.render('pages/newproduct',{time: times  });
 })
 app.post('/newproduct', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = `INSERT INTO products (id, title, price)
     VALUES ('${id}', '${title}', '${price}')`;
     //db.none
@@ -206,12 +207,13 @@ app.post('/newproduct', function (req, res) {
 
 //newuser
 app.get('/newuser', function (req, res) {
-    res.render('pages/newuser');
+    res.render('pages/newuser',{time: times  });
 })
 app.post('/newuser', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = `INSERT INTO users (id, email, password)
     VALUES ('${id}', '${email}', '${password}')`;
     //db.none
