@@ -48,12 +48,13 @@ app.get('/products', function (req, res) {
 // display all products
 app.get('/products/:pid', function (req, res) {
     var pid = req.params.pid;
+    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = "select * from products where id=" + pid;
 
     db.any(sql)
         .then(function (data) {
-            console.log('DATA:' + data);
-            res.render('pages/product_edit', { product: data[0] })
+            //console.log('DATA:' + data);
+            res.render('pages/product_edit', { product: data[0], time: times  });
 
         })
         .catch(function (error) {
@@ -70,7 +71,7 @@ app.get('/users/:id', function (req, res) {
     
     db.any(sql)
         .then(function (data) {
-            console.log('DATA:' + data);
+            //console.log('DATA:' + data);
             res.render('pages/user_edit', { user: data[0], time: times  });
         })
         .catch(function (error) {
