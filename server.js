@@ -182,15 +182,16 @@ app.get('/user_delete/:id', function (req, res) {
 
 //newproduct
 app.get('/newproduct', function (req, res) {
+    var times = moment().format();
     res.render('pages/newproduct',{time: times  });
 })
 app.post('/newproduct', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
-    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
-    var sql = `INSERT INTO products (id, title, price)
-    VALUES ('${id}', '${title}', '${price}')`;
+    var time = req.body.time;
+    var sql = `INSERT INTO products (id, title, price, created_at)
+    VALUES ('${id}', '${title}', '${price}','${time}')`;
     //db.none
     console.log('UPDATE:' + sql);
     db.any(sql)
