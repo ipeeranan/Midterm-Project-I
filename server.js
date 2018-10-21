@@ -208,15 +208,16 @@ app.post('/newproduct', function (req, res) {
 
 //newuser
 app.get('/newuser', function (req, res) {
+    var times = moment().format();
     res.render('pages/newuser',{time: times  });
 })
 app.post('/newuser', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
-    var times = moment().format('MMMM Do YYYY, h:mm:ss a');
-    var sql = `INSERT INTO users (id, email, password)
-    VALUES ('${id}', '${email}', '${password}')`;
+    var time = req.body.time;
+    var sql = `INSERT INTO users (id, email, password, created_at)
+    VALUES ('${id}', '${email}', '${password}','${time}')`;
     //db.none
     console.log('UPDATE:' + sql);
     db.any(sql)
